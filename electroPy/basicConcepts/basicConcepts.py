@@ -50,7 +50,16 @@ complete_circuit = True # a complete circuit is a closed loop that allows curren
 
 # 1.3 Electric circuits
 
+broken_circuit = False # a broken circuit is an open loop that prevents current from flowing
 
+if complete_circuit:
+    current_flows = True
+    
+elif not complete_circuit:
+    current_flows = False
+    
+elif broken_circuit:
+    current_flows = False
 
 # 1.4 Voltage and current 
 
