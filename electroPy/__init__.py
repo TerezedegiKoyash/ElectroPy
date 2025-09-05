@@ -7,7 +7,13 @@ __author__ = "Your Name"
 __email__ = "your.email@example.com"
 
 from .circuits import Circuit, Resistor, Capacitor, Inductor
-from .calculations import ohms_law, power_calculation
+from .calculations import (
+    ohms_law, 
+    power_calculation, 
+    parallel_resistance, 
+    series_resistance,
+    voltage_divider
+)
 
 __all__ = [
     "Circuit",
@@ -15,5 +21,8 @@ __all__ = [
     "Capacitor",
     "Inductor",
     "ohms_law",
-    "power_calculation"
+    "power_calculation",
+    "parallel_resistance",
+    "series_resistance", 
+    "voltage_divider"
 ]
