@@ -119,4 +119,8 @@ elif switch == switch_closed:
 
 # 1.6 Voltage and current in a practical circuit 
 
+voltage_dropped_across_resistance = True # because it takes energy to force electrons to flow against the opposition of a resistance, there will be voltage manifested (or "dropped") between any points in a circuit with resistance between them
+
+current_uniform_voltage_varies = True # although the amount of current is uniform in a simple circuit, the amount of voltage between different sets of points in a single circuit may vary considerably
+
 # 1.7 Conventional versus electron flow 
