@@ -1,3 +1,5 @@
+import math
+
 # BASIC CONCEPTS OF ELECTRICITY
 
 # 1.1 Static electricity 
@@ -82,7 +84,38 @@ polarity = positive_terminal + negative_terminal # the +/- orientation of a volt
 
 # 1.5 Resistance
 
+resistance = True # resistance is the measure of opposition to electric current
 
+short_circuit = True # a short circuit is an electric circuit offering little or no resistance to the flow of electrons
+short_circuit_dangerous = True # short circuits are dangerous with high voltage power sources because the high currents encountered can cause large amounts of heat energy to be released
+
+open_circuit = False # an open circuit has infinite resistance, because no current can flow
+close_circuit = True # a closed circuit has very low resistance, because current can flow easily
+
+if complete_circuit == open_circuit:
+    resistance = math.inf # infinite resistance in an open circuit
+    current_flows = False
+    
+elif complete_circuit == close_circuit:
+    resistance = 0 # zero resistance in a closed circuit
+    current_flows = True
+    
+elif broken_circuit == close_circuit or complete_circuit == open_circuit:
+    resistance = math.inf
+    current_flows = False
+    
+switch = True # a switch is a device that can open or close a circuit
+    
+switch_open = False # an open switch creates an open circuit with infinite resistance
+switch_closed = True # a closed switch creates a closed circuit with very low resistance
+
+if switch == switch_open:
+    resistance = math.inf
+    current_flows = False
+    
+elif switch == switch_closed:
+    resistance = 0
+    current_flows = True
 
 # 1.6 Voltage and current in a practical circuit 
 
