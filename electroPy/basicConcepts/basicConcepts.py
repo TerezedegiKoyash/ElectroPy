@@ -124,3 +124,12 @@ voltage_dropped_across_resistance = True # because it takes energy to force elec
 current_uniform_voltage_varies = True # although the amount of current is uniform in a simple circuit, the amount of voltage between different sets of points in a single circuit may vary considerably
 
 # 1.7 Conventional versus electron flow 
+
+conventional_flow = True # conventional flow assumes current flows from positive to negative terminal
+electron_flow = False # electron flow is the actual physical movement of electrons from negative to positive terminal
+
+conventional_current_direction = '+' + ' -> ' + '-' # conventional current flows from positive to negative
+electron_flow_direction = '-' + ' -> ' + '+' # electrons actually flow from negative to positive
+
+flow_directions_opposite = True # conventional flow and electron flow are opposite in direction but mathematically equivalent
+
