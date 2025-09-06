@@ -3,7 +3,6 @@ import math
 # BASIC CONCEPTS OF ELECTRICITY
 
 # 1.1 Static electricity 
-
 class StaticElectricity:
     
     def __init__(self):
@@ -79,7 +78,6 @@ class StaticElectricity:
         }
 
 # 1.2 Conductors, insulators, and electron flow 
-
 class ElectricalSubstances: 
     
     def __init__(self):
@@ -121,14 +119,19 @@ class ElectricalSubstances:
     def getCircuitTypes(self):
         """Types of electric circuits"""
         return {
-            'complete_circuit': True,
-            'broken_circuit': False,
-            'complete_circuit_description': 'A complete circuit is a closed loop that allows current to flow.',
-            'broken_circuit_description': 'A broken circuit is an open loop that prevents current from flowing.'
+            'complete_circuit': {
+                'status': True,
+                'current_flows': True,
+                'description': 'A complete circuit is a closed loop that allows current to flow.'
+            },
+            'broken_circuit': {
+                'status': True,
+                'current_flows': False,
+                'description': 'A broken circuit is an open loop that prevents current from flowing.'
+            }
         }
 
 # 1.3 Electric circuits
-
 class ElectricCircuits:
 
     def __init__(self):
@@ -142,9 +145,9 @@ class ElectricCircuits:
 
     def checkCurrentFlow(self):
         """Determine if current flows based on circuit status"""
-        if self.is_complete == True:
+        if self.is_complete == self.complete_circuit['current_flows']:
             return { 'complete_circuit': self.complete_circuit }
-        elif self.is_complete == False:
+        elif self.is_complete == self.broken_circuit['current_flows']:
             return { 'broken_circuit': self.broken_circuit }
 
     def breakCircuit(self):
@@ -163,13 +166,12 @@ class ElectricCircuits:
         """Get descriptions of circuit types"""
         circuit_description = self.electrical_substances.getCircuitTypes()
         return {
-            'complete_circuit_description': circuit_description['complete_circuit_description'],
-            'broken_circuit_description': circuit_description['broken_circuit_description']
+            'complete_circuit_description': circuit_description['complete_circuit']['description'],
+            'broken_circuit_description': circuit_description['broken_circuit']['description']
         }
 
 
 # 1.4 Voltage and current 
-
 class VoltageAndCurrent:
     
     def __init__(self):
@@ -179,7 +181,8 @@ class VoltageAndCurrent:
         self.current = True
         self.current_constant_in_single_loop = True
         self.polarity = self.getPolarity()
-    
+        self.circuit_broken = ElectricalSubstances().getCircuitTypes()['broken_circuit']
+
     def getPolarity(self):
         """Define polarity of voltage drop"""
         positive_terminal = '+'
@@ -193,61 +196,88 @@ class VoltageAndCurrent:
         
     def getVoltageAcrossBreak(self, source_voltage):
         """Determine voltage across a break in the circuit"""
-        broken_circuit = True
-        if broken_circuit:
+        if not self.circuit_broken['current_flows']:
             return source_voltage
         else:
             return 0
 
 
 # 1.5 Resistance
+class Resistance: 
 
-resistance = True # resistance is the measure of opposition to electric current
-
-short_circuit = True # a short circuit is an electric circuit offering little or no resistance to the flow of electrons
-short_circuit_dangerous = True # short circuits are dangerous with high voltage power sources because the high currents encountered can cause large amounts of heat energy to be released
-
-open_circuit = False # an open circuit has infinite resistance, because no current can flow
-close_circuit = True # a closed circuit has very low resistance, because current can flow easily
-
-if complete_circuit == open_circuit:
-    resistance = math.inf # infinite resistance in an open circuit
-    current_flows = False
+    def __init__(self):
+        self.resistance = True
+        self.short_circuit = True
+        self.short_circuit_dangerous = True
+        self.open_circuit = False
+        self.closed_circuit = True
+        self.switch = True
     
-elif complete_circuit == close_circuit:
-    resistance = 0 # zero resistance in a closed circuit
-    current_flows = True
+    def getCircuitResistance(self, circuit_type):
+        """Determine resistance based on circuit type"""
+        if circuit_type == 'open':
+            return math.inf
+        elif circuit_type == 'closed':
+            return 0
+        elif circuit_type == 'short':
+            return 0.001
+        
+    def getCurrentFlow(self, circuit_type):
+        """Determine if current flows based on circuit type"""
+        if circuit_type == 'open':
+            return False
+        elif circuit_type in ['closed', 'short']:
+            return True
+        else:
+            return False
     
-elif broken_circuit == close_circuit or complete_circuit == open_circuit:
-    resistance = math.inf
-    current_flows = False
-    
-switch = True # a switch is a device that can open or close a circuit
-    
-switch_open = False # an open switch creates an open circuit with infinite resistance
-switch_closed = True # a closed switch creates a closed circuit with very low resistance
-
-if switch == switch_open:
-    resistance = math.inf
-    current_flows = False
-    
-elif switch == switch_closed:
-    resistance = 0
-    current_flows = True
+    def getSwitchState(self, switch_position):
+        """Get switch resistance and current flow"""
+        flow = ElectricCircuits()
+        break_flow = flow.breakCircuit()
+        complete_flow = flow.completeCircuit()
+        if switch_position == 'open':
+            return {
+                'resistance': math.inf,
+                'current_flows': break_flow,
+                'description': 'Open switch creates an open circuit with infinite resistance.'
+            }
+        elif switch_position == 'closed':
+            return {
+                'resistance': 0,
+                'current_flows': complete_flow,
+                'description': 'Closed switch creates a closed circuit with very low resistance.'
+            }
 
 # 1.6 Voltage and current in a practical circuit 
-
-voltage_dropped_across_resistance = True # because it takes energy to force electrons to flow against the opposition of a resistance, there will be voltage manifested (or "dropped") between any points in a circuit with resistance between them
-
-current_uniform_voltage_varies = True # although the amount of current is uniform in a simple circuit, the amount of voltage between different sets of points in a single circuit may vary considerably
+class PracticalCircuit:
+    
+    def __init__(self):
+        self.voltage_dropped_across_resistance = True
+        self.current_uniform_voltage_varies = True
+        
+    def explainVoltageCurrent(self):
+        """Explain voltage and current behavior in a practical circuit"""
+        return {
+            'voltage_behavior': 'In a practical circuit, voltage is dropped across the resistance.',
+            'current_behavior': 'Current remains uniform throughout the circuit, while voltage varies depending on resistance.'
+        }
 
 # 1.7 Conventional versus electron flow 
-
-conventional_flow = True # conventional flow assumes current flows from positive to negative terminal
-electron_flow = False # electron flow is the actual physical movement of electrons from negative to positive terminal
-
-conventional_current_direction = '+' + ' -> ' + '-' # conventional current flows from positive to negative
-electron_flow_direction = '-' + ' -> ' + '+' # electrons actually flow from negative to positive
-
-flow_directions_opposite = True # conventional flow and electron flow are opposite in direction but mathematically equivalent
-
+class CurrentFlow:
+    
+    def __init__(self):
+        self.conventional_flow = True
+        self.electron_flow = False
+        self.conventional_direction = '+ -> -'
+        self.electron_direction = '- -> +'
+        self.flow_directions_opposite = True
+        
+    def getCompareFlows(self):
+        """Compare conventional and electron flow directions"""
+        return {
+            'conventional_flow_direction': self.conventional_direction,
+            'electron_flow_direction': self.electron_direction,
+            'are_opposite': self.flow_directions_opposite,
+            'description': 'Conventional current flow is from positive to negative, while electron flow is from negative to positive.'
+        }
