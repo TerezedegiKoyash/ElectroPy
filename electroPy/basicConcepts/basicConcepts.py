@@ -170,22 +170,35 @@ class ElectricCircuits:
 
 # 1.4 Voltage and current 
 
-electrostatic_force = True # electrons can be motivated to flow through a conductor by the same force manifested in static electricity
+class VoltageAndCurrent:
+    
+    def __init__(self):
+        self.electrostatic_force = True
+        self.voltage = True
+        self.voltage_drop = True
+        self.current = True
+        self.current_constant_in_single_loop = True
+        self.polarity = self.getPolarity()
+    
+    def getPolarity(self):
+        """Define polarity of voltage drop"""
+        positive_terminal = '+'
+        negative_terminal = '-'
+        return {
+            'positive_terminal': positive_terminal,
+            'negative_terminal': negative_terminal,
+            'polarity': positive_terminal + negative_terminal,
+            'description': 'The +/- orientation of a voltage drop is called the polarity. It is also relative between two points.'
+        }
+        
+    def getVoltageAcrossBreak(self, source_voltage):
+        """Determine voltage across a break in the circuit"""
+        broken_circuit = True
+        if broken_circuit:
+            return source_voltage
+        else:
+            return 0
 
-voltage = True # voltage is the measure of specific potential energy (potential energy per unit charge) between two locations, the measure of "push" available to motivate electrons
-
-voltage_drop = True # voltage, as an expression of potential energy, is always relative between two locations, or points. Sometimes it is called a voltage "drop."
-
-current = True # when a voltage source is connected to a circuit, the voltage will cause a uniform flow of electrons through that circuit called a current
-
-current_constant_in_single_loop = True # in a single (one loop) circuit, the amount of current at any point is the same as the amount of current at any other point
-
-if broken_circuit:
-    voltage_across_break = voltage # if a circuit containing a voltage source is broken, the full voltage of that source will appear across the points of the break
-
-positive_terminal = '+'
-negative_terminal = '-'
-polarity = positive_terminal + negative_terminal # the +/- orientation of a voltage drop is called the polarity. It is also relative between two points
 
 # 1.5 Resistance
 
