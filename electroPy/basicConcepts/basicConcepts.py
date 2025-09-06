@@ -80,17 +80,52 @@ class StaticElectricity:
 
 # 1.2 Conductors, insulators, and electron flow 
 
-conductors = True # in conductive materials, the outer electrons in each atom can easily come or go, and are called free electrons
+class ElectricalSubstances: 
+    
+    def __init__(self):
+        self.conductors = self.getConductors()
+        self.insulators = self.getInsulators()
+        self.metals = self.getMetals()
+        self.current_types = self.getCurrentTypes()
 
-insulators = False # in insulators, the outer electrons are tightly bound to their atoms and cannot move freely
-
-metals = True # metals are good conductors because their atoms have few outer electrons that are loosely bound
-
-electric_current = True # dynamic electricity, or electric current, is the uniform motion of electrons through a conductor
-
-static_electricity = False # static electricity is the accumulation of excess electric charge on an object
-
-complete_circuit = True # a complete circuit is a closed loop that allows current to flow
+    def getConductors(self):
+        """Properties of conductive substances"""
+        return {
+            'free_electrons': True,
+            'description': 'In conductive materials, the outer electrons in each atom can easily come or go, and are called free electrons.'
+        }
+        
+    def getInsulators(self):
+        """Properties of insulative substances"""
+        return {
+            'free_electrons': False,
+            'description': 'In insulators, the outer electrons are tightly bound to their atoms and cannot move freely.'
+        }
+        
+    def getMetals(self):
+        """Properties of metals as conductors"""
+        return {
+            'good_conductors': True,
+            'description': 'Metals are good conductors because their atoms have few outer electrons that are loosely bound.'
+        }
+    
+    def getCurrentTypes(self):
+        """Types of electrical phenomena"""
+        return {
+            'electric_current': True,
+            'static_electricity': False,
+            'electric_current_description': 'Dynamic electricity, or electric current, is the uniform motion of electrons through a conductor.',
+            'static_electricity_description': 'Static electricity is the accumulation of excess electric charge on an object.'
+        }
+        
+    def getCircuitTypes(self):
+        """Types of electric circuits"""
+        return {
+            'complete_circuit': True,
+            'broken_circuit': False,
+            'complete_circuit_description': 'A complete circuit is a closed loop that allows current to flow.',
+            'broken_circuit_description': 'A broken circuit is an open loop that prevents current from flowing.'
+        }
 
 # 1.3 Electric circuits
 
