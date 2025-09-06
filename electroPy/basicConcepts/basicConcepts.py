@@ -8,7 +8,6 @@ class StaticElectricity:
     
     def __init__(self):
         self.charges = self.getCharges()
-        self.atomic_charge = self.getAtomicCharge()
         self.electron_mobility = self.electronMobility()
         self.atomic_identity = self.atomicIdentity()
         self.isotope_example = self.isotopeExample()
@@ -33,10 +32,10 @@ class StaticElectricity:
     
     def getAtomicCharge(self, protons, neutrons, electrons):
         """Calculate total charge of an atom"""
-        proton_charge = protons * self.charges['positive_charge']
-        neutron_charge = neutrons * self.charges['neutral_charge']
-        electron_charge = electrons * self.charges['negative_charge']
-        
+        proton_charge = protons * self.charges['protonic_charge']
+        neutron_charge = neutrons * self.charges['neutrons_charge']
+        electron_charge = electrons * self.charges['electronic_charge']
+
         return proton_charge + neutron_charge + electron_charge
 
     def electronMobility(self):
@@ -63,17 +62,22 @@ class StaticElectricity:
         neutron_count = 0
         electron_count = 1
 
-        protius = {
+        protium = {
             'proton': proton_count,
             'neutron': neutron_count,
             'electron': electron_count
         }
-        protius_charge = self.getAtomicCharge(proton_count, neutron_count, electron_count)
+        protium_charge = self.getAtomicCharge(proton_count, neutron_count, electron_count)
         # Hydrogen-1, the most common isotope of hydrogen, has 1 proton, 0 neutrons, and 1 electron
-        # the electric charge of protius is 0, because it has 1 proton (+1) and 1 electron (-1)
-        
-        return protius, protius_charge
-        
+        # the electric charge of protium is 0, because it has 1 proton (+1) and 1 electron (-1)
+
+        return {
+            'atom': protium,
+            'charge': protium_charge,
+            'is_neutral': protium_charge == 0,
+            'element': 'Hydrogen-1 (Protium)'
+        }
+
 # 1.2 Conductors, insulators, and electron flow 
 
 conductors = True # in conductive materials, the outer electrons in each atom can easily come or go, and are called free electrons
