@@ -129,16 +129,44 @@ class ElectricalSubstances:
 
 # 1.3 Electric circuits
 
-broken_circuit = False # a broken circuit is an open loop that prevents current from flowing
+class ElectricCircuits:
 
-if complete_circuit:
-    current_flows = True
-    
-elif not complete_circuit:
-    current_flows = False
-    
-elif broken_circuit:
-    current_flows = False
+    def __init__(self):
+        self.electrical_substances = ElectricalSubstances()
+        circuit_types = self.electrical_substances.getCircuitTypes()
+        self.complete_circuit = circuit_types['complete_circuit']
+        self.broken_circuit = circuit_types['broken_circuit']
+        self.is_complete = True # circuit starts as complete
+        self.current_flows = self.checkCurrentFlow()
+        self.circuit_description = self.getCircuitDescription()
+
+    def checkCurrentFlow(self):
+        """Determine if current flows based on circuit status"""
+        if self.is_complete == True:
+            return { 'complete_circuit': self.complete_circuit }
+        elif self.is_complete == False:
+            return { 'broken_circuit': self.broken_circuit }
+
+    def breakCircuit(self):
+        """Simulate breaking the circuit"""
+        self.is_complete = False
+        self.current_flows = self.checkCurrentFlow()
+        return self.current_flows
+
+    def completeCircuit(self):
+        """Simulate completing the circuit"""
+        self.is_complete = True
+        self.current_flows = self.checkCurrentFlow()
+        return self.current_flows
+
+    def getCircuitDescription(self):
+        """Get descriptions of circuit types"""
+        circuit_description = self.electrical_substances.getCircuitTypes()
+        return {
+            'complete_circuit_description': circuit_description['complete_circuit_description'],
+            'broken_circuit_description': circuit_description['broken_circuit_description']
+        }
+
 
 # 1.4 Voltage and current 
 
