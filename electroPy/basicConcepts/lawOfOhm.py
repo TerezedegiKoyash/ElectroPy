@@ -60,11 +60,77 @@ class OhmsLawAnalogy:
 
 # 2.3 Power in electric circuits
 
+class ElectricPower:
+    def __init__(self):
+        self.power = 'P'  # Power (P) in watts (W)
+        self.voltage = 'E'  # Voltage (E) in volts (V)
+        self.current = 'I'  # Current (I) in amperes (A)
+        self.watt_per_horsepower = 746  # 1 horsepower = 746 watts
+        
+    def getPowerFormulas(self):
+        """Return electric power formulas"""
+        return {
+            'basic_power': 'P = E * I',  # Power = Voltage × Current
+        }
+    
+    def getPower(self, voltage, current):
+        """Calculate power using voltage and current"""
+        return voltage * current
+    
+    def getVoltage(self, power, current):
+        """Calculate voltage using power and current"""
+        return power / current
 
+    def getCurrent(self, power, voltage):
+        """Calculate current using power and voltage"""
+        return power / voltage
+
+    def convertHorsepowerToWatts(self, horsepower):
+        """Convert horsepower to watts"""
+        return horsepower * self.watt_per_horsepower
+    
+    def convertWattsToHorsepower(self, watts):
+        """Convert watts to horsepower"""
+        return watts / self.watt_per_horsepower
+    
 
 # 2.4 Calculating electric power
 
+class CalculatingElectricPower:
+    def __init__(self):
+        self.electric_power = ElectricPower()
+        
+    def getPowerFormulas(self):
+        """Get electric power formulas"""
+        return {
+            'power_from_current_and_voltage': self.electric_power.getPowerFormulas(),
+            'power_from_resistance_and_current': 'P = I^2 * R',
+            'power_from_voltage_and_resistance': 'P = E^2 / R'
+        }
+
+    def calculatePowerFromVoltageCurrent(self, voltage, current):
+        """Calculate electric power"""
+        return self.electric_power.getPower(voltage, current)
+    
+    def calculatePowerFromResistanceCurrent(self, resistance, current):
+        """Calculate power from resistance and current"""
+        return (current ** 2) * resistance
+    
+    def calculatePowerFromVoltageResistance(self, voltage, resistance):
+        """Calculate power from voltage and resistance"""
+        return (voltage ** 2) / resistance
+
+    def calculateVoltage(self, power, current):
+        """Calculate voltage"""
+        return self.electric_power.getVoltage(power, current)
+
+    def calculateCurrent(self, power, voltage):
+        """Calculate current"""
+        return self.electric_power.getCurrent(power, voltage)
+
 # 2.5 Resistors
+
+
 
 # 2.6 Nonlinear conduction
 
