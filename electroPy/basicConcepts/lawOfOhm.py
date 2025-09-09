@@ -130,7 +130,103 @@ class CalculatingElectricPower:
 
 # 2.5 Resistors
 
-
+class Resistors:
+    
+    def __init__(self):
+        self.resistance_rating = True  # rated in ohms (Ω)
+        self.power_rating = True       # rated in watts (W) - ability to dissipate heat
+        self.tolerance = True          # precision of resistance value
+        self.temperature_coefficient = True  # how resistance changes with temperature
+        self.load_device = True        # resistors can represent loads in circuits
+        
+    def getResistorRatings(self):
+        """Resistor ratings and specifications"""
+        return {
+            'resistance_rating': {
+                'unit': 'ohms (Ω)',
+                'description': 'Precise amount of resistance provided',
+                'purpose': 'Controls current flow in circuits'
+            },
+            'power_rating': {
+                'unit': 'watts (W)',
+                'description': 'Ability to dissipate heat energy safely',
+                'purpose': 'Prevents resistor overheating and damage'
+            },
+            'tolerance': {
+                'unit': 'percentage (%)',
+                'description': 'Precision of actual vs. rated resistance',
+                'common_values': ['1%', '5%', '10%', '20%']
+            }
+        }
+    
+    def getResistorCharacteristics(self):
+        """Physical and electrical characteristics of resistors"""
+        return {
+            'resistance_vs_size': {
+                'rule': 'Resistance ratings cannot be determined from physical size',
+                'reason': 'Resistance depends on material and construction, not size',
+                'identification': 'Use color codes or printed values to determine resistance'
+            },
+            'power_vs_size': {
+                'rule': 'Larger resistor = higher power rating (approximately)',
+                'reason': 'Larger surface area dissipates heat more effectively',
+                'safety': 'Prevents damage from overheating'
+            },
+            'load_representation': {
+                'definition': 'Any device that performs useful task with electric power',
+                'schematic_use': 'Resistor symbols often represent non-specific loads',
+                'purpose': 'Simplified circuit analysis and design'
+            }
+        }
+    
+    def getResistorTypes(self):
+        """Types of resistors"""
+        return {
+            'fixed_resistors': {
+                'carbon_composition': 'Inexpensive, wide tolerance',
+                'carbon_film': 'Better stability than composition',
+                'metal_film': 'High precision, low noise',
+                'wire_wound': 'High power handling capability'
+            },
+            'variable_resistors': {
+                'potentiometer': 'Three terminals, voltage divider',
+                'rheostat': 'Two terminals, current control',
+                'trimmer': 'Small adjustment resistor'
+            }
+        }
+    
+    def calculatePowerDissipation(self, voltage=None, current=None, resistance=None):
+        """Calculate power dissipated by resistor"""
+        if voltage is not None and current is not None:
+            return voltage * current
+        elif current is not None and resistance is not None:
+            return current**2 * resistance
+        elif voltage is not None and resistance is not None:
+            return voltage**2 / resistance
+        else:
+            raise ValueError("Need at least two parameters")
+    
+    def checkPowerRating(self, calculated_power, rated_power):
+        """Check if resistor can handle the calculated power"""
+        safety_factor = 0.8  # Use 80% of rated power for safety
+        safe_power = rated_power * safety_factor
+        
+        return {
+            'calculated_power': calculated_power,
+            'rated_power': rated_power,
+            'safe_operating_power': safe_power,
+            'is_safe': calculated_power <= safe_power,
+            'recommendation': 'Safe to use' if calculated_power <= safe_power else 'Use higher wattage resistor'
+        }
+        
+    def explainLoadConcept(self):
+        """Explain the concept of electrical loads"""
+        return {
+            'load_definition': 'Any device that performs some useful task with electric power',
+            'examples': ['Light bulbs', 'Motors', 'Heaters', 'Electronic circuits'],
+            'schematic_representation': 'Resistor symbols often represent non-specific loads in diagrams',
+            'purpose': 'Simplifies circuit analysis by treating complex devices as resistive loads'
+        }
 
 # 2.6 Nonlinear conduction
 
