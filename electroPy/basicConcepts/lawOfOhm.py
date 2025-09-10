@@ -230,8 +230,358 @@ class Resistors:
 
 # 2.6 Nonlinear conduction
 
+class NonlinearConduction:
+    
+    def __init__(self):
+        self.linear_function = True    # plotted as straight line on graph
+        self.nonlinear_function = True # not a straight line
+        self.stable_resistance = True  # most conductive materials
+        self.variable_resistance = True # some materials change resistance
+        
+    def getConductionTypes(self):
+        """Types of electrical conduction"""
+        return {
+            'linear_conduction': {
+                'definition': 'Any function that can be plotted on a graph as a straight line',
+                'characteristic': 'Stable resistance over wide range of conditions',
+                'formula': 'I = E/R (straight line plot of current over voltage)',
+                'materials': 'Most conductive materials (metals, carbon)'
+            },
+            'nonlinear_conduction': {
+                'definition': 'Resistance varies with changes in voltage or current',
+                'characteristic': 'Plot of current over voltage is not a straight line',
+                'cause': 'Resistance changes with operating conditions',
+                'examples': 'Semiconductor devices, gas discharge tubes'
+            }
+        }
+    
+    def getVaristorProperties(self):
+        """Properties of varistor components"""
+        return {
+            'varistor_definition': 'Component that changes resistance with voltage across it',
+            'normal_operation': {
+                'low_voltage': 'High resistance with little voltage across it',
+                'protection_mode': 'Resistance decreases dramatically at breakdown voltage'
+            },
+            'breakdown_voltage': {
+                'also_called': 'Firing voltage',
+                'behavior': 'Resistance drops suddenly when voltage reaches this level',
+                'application': 'Surge protection in electrical circuits'
+            }
+        }
+    
+    def getNegativeResistance(self):
+        """Explain negative resistance phenomenon"""
+        return {
+            'negative_resistance_definition': 'Current decreases as applied voltage increases',
+            'unusual_behavior': 'Opposite of normal resistive behavior',
+            'examples': {
+                'electron_tubes': 'Tetrode tube exhibits negative resistance',
+                'semiconductor_diodes': 'Esaki (tunnel) diode shows negative resistance'
+            },
+            'voltage_range': 'Occurs over certain range of voltages only',
+            'applications': 'Used in oscillators and amplifiers'
+        }
+    
+    def explainResistanceStability(self):
+        """Explain why some materials have stable vs variable resistance"""
+        return {
+            'stable_materials': {
+                'characteristic': 'Resistance stable over wide range of conditions',
+                'examples': 'Most metals, carbon resistors',
+                'graph_behavior': 'Linear I-V relationship (straight line)'
+            },
+            'variable_materials': {
+                'characteristic': 'Resistance changes with voltage, current, or temperature',
+                'factors': ['Temperature', 'Electric field strength', 'Current density'],
+                'graph_behavior': 'Nonlinear I-V relationship (curved line)'
+            },
+            'practical_implications': {
+                'circuit_design': 'Must account for resistance variations',
+                'component_selection': 'Choose appropriate device for application'
+            }
+        }
+    
+    def getIVCharacteristics(self):
+        """Current-Voltage characteristics of different devices"""
+        return {
+            'linear_devices': {
+                'resistor': 'Straight line through origin (I = V/R)',
+                'slope': 'Slope = 1/R (conductance)'
+            },
+            'nonlinear_devices': {
+                'diode': 'Exponential curve, conducts mainly one direction',
+                'varistor': 'Low current until breakdown, then sharp increase',
+                'tunnel_diode': 'Shows negative resistance region',
+                'incandescent_bulb': 'Resistance increases with temperature/current'
+            }
+        }
+
 # 2.7 Circuit wiring
+
+class CircuitWiring:
+    
+    def __init__(self):
+        self.ideal_wire_resistance = 0  # Assumed zero resistance
+        self.real_wire_resistance = True  # Has some resistance in reality
+        self.electrically_common_points = True
+        self.wire_length_irrelevant = True
+        
+    def getWiringAssumptions(self):
+        """Basic assumptions about circuit wiring"""
+        return {
+            'zero_resistance_assumption': {
+                'ideal_condition': 'Connecting wires assumed to have zero resistance',
+                'unless_stated': 'Exception when wire resistance is specifically mentioned',
+                'purpose': 'Simplifies circuit analysis'
+            },
+            'wire_length_flexibility': {
+                'rule': 'Wires can be shortened or lengthened without impacting circuit function',
+                'what_matters': 'Components must be attached in same sequence',
+                'implication': 'Physical wire length irrelevant to electrical function'
+            }
+        }
+    
+    def getElectricalCommonPoints(self):
+        """Explain electrically common points in circuits"""
+        return {
+            'definition': 'Points directly connected by zero resistance wire',
+            'characteristics': {
+                'zero_voltage_drop': 'Zero voltage dropped between common points',
+                'regardless_of_current': 'True regardless of current magnitude (ideally)',
+                'same_potential': 'All common points at same electrical potential'
+            },
+            'measurement_implications': {
+                'voltage_readings': 'Same voltage readings between sets of common points',
+                'resistance_readings': 'Same resistance readings between common points',
+                'practical_use': 'Simplifies circuit analysis and troubleshooting'
+            }
+        }
+    
+    def getIdealVsRealConditions(self):
+        """Compare ideal and real-world wiring conditions"""
+        return {
+            'ideal_conditions': {
+                'wire_resistance': 'Absolutely zero resistance',
+                'voltage_drop': 'No voltage drop across wires',
+                'current_capacity': 'Unlimited current capacity',
+                'use_case': 'Theoretical circuit analysis'
+            },
+            'real_world_conditions': {
+                'wire_resistance': 'Small but non-zero resistance',
+                'voltage_drop': 'Slight voltage drop under high current',
+                'current_capacity': 'Limited by wire gauge and heat dissipation',
+                'design_consideration': 'Wire resistance should be low enough for general principles to hold'
+            },
+            'practical_application': {
+                'circuit_design': 'Choose appropriate wire gauge for current levels',
+                'analysis_validity': 'Ideal assumptions valid when wire resistance << circuit resistance'
+            }
+        }
+    
+    def explainWireResistanceEffects(self):
+        """Explain when wire resistance becomes significant"""
+        return {
+            'negligible_conditions': {
+                'low_current_circuits': 'Wire resistance effect minimal',
+                'short_wire_runs': 'Resistance proportional to length',
+                'thick_wires': 'Lower resistance with larger cross-sectional area'
+            },
+            'significant_conditions': {
+                'high_current_circuits': 'Wire voltage drop becomes noticeable',
+                'long_wire_runs': 'Resistance adds up over distance',
+                'thin_wires': 'Higher resistance limits current capacity'
+            },
+            'practical_examples': {
+                'household_wiring': 'Heavy appliances need thick wires',
+                'automotive': 'Starter circuits use very thick cables',
+                'electronics': 'PCB traces designed for minimal resistance'
+            }
+        }
+    
+    def calculateWireResistance(self, resistivity, length, cross_sectional_area):
+        """Calculate wire resistance using material properties"""
+        return {
+            'formula': 'R = ρ × L / A',
+            'calculated_resistance': (resistivity * length) / cross_sectional_area,
+            'units': 'ohms (Ω)',
+            'parameters': {
+                'resistivity': f'{resistivity} Ω·m (material property)',
+                'length': f'{length} m',
+                'area': f'{cross_sectional_area} m²'
+            }
+        }
 
 # 2.8 Polarity of voltage drops
 
+class VoltageDropPolarity:
+    
+    def __init__(self):
+        self.electron_flow_direction = True
+        self.conventional_current_direction = True
+        self.voltage_drop_polarity = True
+        self.resistive_component_polarity = True
+        
+    def getPolarityRules(self):
+        """Rules for determining voltage drop polarity"""
+        return {
+            'electron_flow_rule': {
+                'description': 'Polarity determined by direction of electron flow through resistive component',
+                'negative_terminal': 'Where electrons enter the component',
+                'positive_terminal': 'Where electrons exit the component',
+                'principle': 'Electrons flow from negative to positive through the component'
+            },
+            'conventional_current_rule': {
+                'description': 'Conventional current flows opposite to electron flow',
+                'positive_terminal': 'Where conventional current enters the component',
+                'negative_terminal': 'Where conventional current exits the component',
+                'relationship': 'Opposite polarity compared to electron flow direction'
+            }
+        }
+    
+    def explainPolarityDetermination(self):
+        """Explain how to determine voltage drop polarity"""
+        return {
+            'step_1': 'Identify direction of current flow through component',
+            'step_2_electron_flow': {
+                'method': 'Using electron flow convention',
+                'negative_end': 'Mark negative (-) where electrons enter',
+                'positive_end': 'Mark positive (+) where electrons exit'
+            },
+            'step_2_conventional': {
+                'method': 'Using conventional current convention',
+                'positive_end': 'Mark positive (+) where conventional current enters',
+                'negative_end': 'Mark negative (-) where conventional current exits'
+            },
+            'result': 'Voltage drop polarity established across resistive component'
+        }
+    
+    def getVoltageDropExamples(self):
+        """Examples of voltage drop polarity in circuits"""
+        return {
+            'simple_resistor_circuit': {
+                'description': 'Single resistor with battery',
+                'electron_flow': 'From battery negative terminal through resistor to positive terminal',
+                'resistor_polarity': 'Negative where electrons enter, positive where electrons exit',
+                'voltage_measurement': 'Positive voltage drop measured from negative to positive end'
+            },
+            'multiple_resistors': {
+                'description': 'Series circuit with multiple resistors',
+                'current_direction': 'Same current flows through all resistors',
+                'individual_polarities': 'Each resistor has voltage drop with same polarity pattern',
+                'sum_verification': 'Sum of voltage drops equals source voltage'
+            }
+        }
+    
+    def explainPolarityImportance(self):
+        """Explain why voltage drop polarity matters"""
+        return {
+            'circuit_analysis': {
+                'kirchhoffs_voltage_law': 'Correct polarity needed for KVL calculations',
+                'voltage_summation': 'Signs matter when adding voltage drops',
+                'troubleshooting': 'Polarity helps identify circuit problems'
+            },
+            'measurement_techniques': {
+                'multimeter_connections': 'Red probe to positive, black to negative',
+                'expected_readings': 'Positive reading confirms correct polarity',
+                'reverse_connection': 'Negative reading indicates reversed polarity'
+            },
+            'practical_applications': {
+                'component_orientation': 'Some components are polarity sensitive',
+                'circuit_design': 'Proper polarity ensures correct operation',
+                'safety_considerations': 'Wrong polarity can damage sensitive components'
+            }
+        }
+    
+    def compareFlowConventions(self):
+        """Compare electron flow vs conventional current for polarity"""
+        return {
+            'electron_flow_convention': {
+                'flow_direction': 'Negative to positive terminal (actual electron movement)',
+                'voltage_drop_polarity': 'Negative where electrons enter, positive where they exit',
+                'used_by': 'Some textbooks and electron theory explanations'
+            },
+            'conventional_current_convention': {
+                'flow_direction': 'Positive to negative terminal (historical convention)',
+                'voltage_drop_polarity': 'Positive where current enters, negative where it exits',
+                'used_by': 'Most engineering practices and circuit analysis'
+            },
+            'consistency_requirement': {
+                'important_note': 'Use same convention throughout entire analysis',
+                'result': 'Both methods give same final answers when used consistently',
+                'recommendation': 'Choose one convention and stick with it'
+            }
+        }
+        
 # 2.9 Computer simulation of electric circuits
+
+class CircuitSimulation:
+    
+    def __init__(self):
+        self.simulation_software = True
+        self.spice_simulators = True
+        self.educational_simulators = True
+        
+    def getSimulationTools(self):
+        """Circuit simulation tools and software"""
+        return {
+            'professional_tools': {
+                'SPICE': 'Industry standard circuit simulator',
+                'LTSpice': 'Free version from Linear Technology', 
+                'PSpice': 'Commercial SPICE version',
+                'Multisim': 'Educational circuit simulation'
+            },
+            'educational_tools': {
+                'CircuitJS': 'Web-based circuit simulator',
+                'Tinkercad': 'Online electronics simulator',
+                'PhET': 'Interactive physics simulations',
+                'EveryCircuit': 'Visual circuit simulator'
+            },
+            'advantages': {
+                'cost_effective': 'Test circuits without physical components',
+                'safety': 'No risk of damage or injury',
+                'analysis': 'Detailed measurements and waveform viewing',
+                'iteration': 'Quick design modifications and testing',
+                'learning': 'Visual feedback helps understand concepts'
+            }
+        }
+    
+    def simulateOhmsLawCircuit(self, voltage, resistance):
+        """Simulate basic Ohm's Law circuit"""
+        current = voltage / resistance
+        power = voltage * current
+        
+        return {
+            'input_parameters': {
+                'source_voltage': f"{voltage} V",
+                'resistance': f"{resistance} Ω"
+            },
+            'calculated_results': {
+                'current': f"{current:.3f} A",
+                'power': f"{power:.3f} W"
+            },
+            'verification': {
+                'ohms_law': f"V = I × R: {voltage} = {current:.3f} × {resistance}",
+                'power_law': f"P = V × I: {power:.3f} = {voltage} × {current:.3f}"
+            }
+        }
+    
+    def getSimulationBenefits(self):
+        """Benefits of using circuit simulation"""
+        return {
+            'educational_benefits': {
+                'visualization': 'See current flow and voltage drops',
+                'experimentation': 'Try different component values safely',
+                'understanding': 'Immediate feedback helps learning'
+            },
+            'practical_benefits': {
+                'prototyping': 'Test designs before building',
+                'troubleshooting': 'Identify problems early',
+                'optimization': 'Fine-tune component values'
+            },
+            'limitations': {
+                'ideal_components': 'May not account for real-world imperfections',
+                'temperature_effects': 'Limited modeling of thermal effects',
+                'parasitic_elements': 'May ignore stray capacitance/inductance'
+            }
+        }
